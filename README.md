@@ -39,7 +39,7 @@ Supported options:
 * `pngcrush_options` (default: `array('-reduce', '-q', '-ow')`)
 * `pngout_options` (default: `array('-s3', '-q', '-y')`)
 * `gifsicle_options` (default: `array('-b', '-O5')`)
-* `jpegoptim_options` (default: `array('--strip-all', '--all-progressive')`)
+* `jpegoptim_options` (default: `array('--strip-all', '--all-progressive', '--max=90')`)
 * `jpegtran_options` (default: `array('-optimize', '-progressive')`)
 * `optipng_bin` (default: will be guessed) - you can enforce paths to binaries, but by default it will be guessed
 * `pngquant_bin`
