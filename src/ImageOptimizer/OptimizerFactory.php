@@ -44,7 +44,7 @@ class OptimizerFactory
             'pngcrush_options' => array('-reduce', '-q', '-ow'),
             'pngout_options' => array('-s3', '-q', '-y'),
             'gifsicle_options' => array('-b', '-O5'),
-            'jpegoptim_options' => array('--strip-all', '--all-progressive'),
+            'jpegoptim_options' => array('--strip-all', '--all-progressive', '--max=90'),
             'jpegtran_options' => array('-optimize', '-progressive'),
             'advpng_options' => array('-z', '-4', '-q')
         ));
