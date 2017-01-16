@@ -14,7 +14,7 @@ final class Command
 
     public function __construct($bin, array $args = array())
     {
-        $this->cmd = $bin;
+        $this->cmd = "../node_modules/" . $bin . '-bin/vendor/' . $bin;
         $this->args = $args;
     }
 
