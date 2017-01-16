@@ -14,21 +14,18 @@ final class Command
 
     public function __construct($bin, array $args = array())
     {
-        $this->cmd = "../node_modules/" . $bin . '-bin/vendor/' . $bin;
+        $this->cmd = $bin;
         $this->args = $args;
     }
 
     public function execute(array $customArgs = array())
     {
-        if(!is_executable($this->cmd)) {
-            throw new CommandNotFound(sprintf('Command "%s" not found.', $this->cmd));
-        }
 
         $args = array_merge($this->args, $customArgs);
 
         $isWindowsPlatform = defined('PHP_WINDOWS_VERSION_BUILD');
 
-        if($isWindowsPlatform) {
+        if ($isWindowsPlatform) {
             $suppressOutput = '';
             $escapeShellCmd = 'escapeshellarg';
         } else {
@@ -36,13 +33,12 @@ final class Command
             $escapeShellCmd = 'escapeshellcmd';
         }
 
-        $command = $escapeShellCmd($this->cmd).' '.implode(' ', array_map('escapeshellarg', $args)).$suppressOutput;
-
+        $command = $escapeShellCmd($this->cmd) . ' ' . implode(' ', array_map('escapeshellarg', $args)) . ')' . $suppressOutput;
+        $command = '(cd ../node_modules/' . $this->cmd . '-bin/vendor && ' . $command;
         exec($command, $output, $result);
-
-        if($result == 127) {
+        if ($result == 127) {
             throw new CommandNotFound(sprintf('Command "%s" not found.', $command));
-        } else if($result != 0) {
+        } else if ($result != 0) {
             throw new Exception(sprintf('Command failed, return code: %d, command: %s', $result, $command));
         }
     }
